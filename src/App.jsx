@@ -1,16 +1,3 @@
-/**
- * App.jsx  —  Connect Four root component
- *
- * Responsibilities (only):
- *   1. Inject global CSS
- *   2. Call useGameState() to get all state & actions
- *   3. Compose child components; pass them only what they need
- *
- * All game logic lives in hooks/useGameState.js
- * All styles live in styles/gameStyles.js
- * Each UI piece lives in its own components/*.jsx file
- */
-
 import { gameStyles } from "./styles/gameStyles.js";
 import { useGameState } from "./hooks/useGameState.js";
 import { TUTORIAL_STEPS } from "./constants/tutorialSteps.js";
@@ -52,7 +39,6 @@ export default function App() {
     finishTutorial,
   } = useGameState();
 
-  // ── Derive tutorial-specific props ─────────────────────────────────────────
   const isTutorial = phase === PHASE_TUTORIAL;
   const currentTutorialStep = TUTORIAL_STEPS[tutorialStep];
 
@@ -77,21 +63,17 @@ export default function App() {
       <div className="app">
         <Stars />
 
-        {/* ── Onboarding ──────────────────────────────────────────────── */}
         {phase === PHASE_ONBOARDING && (
           <OnboardingModal
             onStart={() => {
               handleRestart();
-              // setPhase is exposed via the hook only to jump to playing
               skipTutorial();
             }}
             onTutorial={startTutorial}
           />
         )}
 
-        {/* ── Game layout ─────────────────────────────────────────────── */}
         <div className="game-container">
-          {/* Board */}
           <div className="board-section">
             <div className="title">CONNECT FOUR</div>
 
@@ -116,7 +98,6 @@ export default function App() {
             </div>
           </div>
 
-          {/* Side panel */}
           <SidePanel
             currentPlayer={currentPlayer}
             winner={winner}
@@ -134,7 +115,6 @@ export default function App() {
           />
         </div>
 
-        {/* ── Tutorial step banner ─────────────────────────────────────── */}
         {showTutorialBanner && (
           <TutorialBanner
             step={tutorialStep}
@@ -143,7 +123,6 @@ export default function App() {
           />
         )}
 
-        {/* ── Tutorial completion card ─────────────────────────────────── */}
         {showTutorialFinish && (
           <div className="result-banner">
             <div className="result-card">
@@ -161,7 +140,6 @@ export default function App() {
           </div>
         )}
 
-        {/* ── Game result overlay ──────────────────────────────────────── */}
         {showResult && phase === PHASE_PLAYING && (
           <ResultCard winner={winner} onRestart={handleRestart} />
         )}
