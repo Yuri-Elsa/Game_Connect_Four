@@ -184,7 +184,3 @@ export function getBestMove(board, player, depth, timeLimitSec) {
 Lalu impor dan tambahkan opsi di `SidePanel.jsx` dan `useGameState.js`.
 
 ---
-
-## 📄 Lisensi
-
-[MIT](LICENSE) © 2025
